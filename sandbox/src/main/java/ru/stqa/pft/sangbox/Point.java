@@ -1,3 +1,5 @@
+package ru.stqa.pft.sangbox;
+
 public class Point {
     public double x1;
     public double x2;
