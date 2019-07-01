@@ -9,17 +9,9 @@ public class Point {
         this.y = y;
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public static double distance(Point p1, Point p2) {
-        double xdist = p2.getX() - p1.getX();
-        double ydist = p2.getY() - p1.getY();
+    public double distance(Point p) {
+        double xdist = this.x - p.x;
+        double ydist = this.y - p.y;
         return Math.sqrt(xdist * xdist + ydist * ydist);
     }
 }
