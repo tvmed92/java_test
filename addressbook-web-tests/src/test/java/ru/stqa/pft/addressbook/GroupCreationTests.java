@@ -3,29 +3,30 @@ package ru.stqa.pft.addressbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
 public class GroupCreationTests {
-  private WebDriver wD;
+  private ChromeDriver wD;
 
-  @BeforeMethod(alwaysRun = true)
+  @BeforeMethod
   public void setUp() throws Exception {
     wD = new ChromeDriver();
     wD.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-  }
-
-  @Test
-  public void testGroupCreation() throws Exception {
     wD.get("http://localhost/addressbook/");
     wD.findElement(By.name("user")).clear();
     wD.findElement(By.name("user")).sendKeys("admin");
     wD.findElement(By.name("pass")).clear();
     wD.findElement(By.name("pass")).sendKeys("secret");
     wD.findElement(By.xpath("//input[@value='Login']")).click();
+  }
+
+  @Test
+  public void testGroupCreation() throws Exception {
     wD.findElement(By.linkText("groups")).click();
     wD.findElement(By.name("new")).click();
     wD.findElement(By.name("group_name")).click();
@@ -41,7 +42,7 @@ public class GroupCreationTests {
     wD.findElement(By.linkText("Logout")).click();
   }
 
-  @AfterMethod(alwaysRun = true)
+  @AfterMethod
   public void tearDown() throws Exception {
     wD.quit();
   }
