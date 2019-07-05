@@ -39,6 +39,10 @@ public class GroupCreationTests {
                 "test_footer"));
         submitGroupCreation();
         returnToGroupPage();
+        logout();
+    }
+
+    private void logout() {
         wD.findElement(By.linkText("Logout")).click();
     }
 
