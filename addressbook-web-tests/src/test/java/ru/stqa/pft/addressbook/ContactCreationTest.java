@@ -28,14 +28,14 @@ public class ContactCreationTest {
     wD.findElement(By.name("pass")).click();
     wD.findElement(By.name("pass")).clear();
     wD.findElement(By.name("pass")).sendKeys(password);
-    wD.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Password:'])[1]/following::input[2]")).click();
+    wD.findElement(By.xpath("//input[@value='Login']")).click();
   }
 
   @Test
   public void testContactCreation() throws Exception {
     goToAddNew();
     fillContactForm(new ContactData("taty", "vikt", "molx", "molx2", "qwerty", "gazq", "kron", "ttt", "111", "111", "222", "tat@rrr.ru", "1992", "eeee", "www"));
-    sendContactForm();
+    submitContactForm();
     goToHomePage();
     logout();
   }
@@ -48,8 +48,8 @@ public class ContactCreationTest {
     wD.findElement(By.linkText("home page")).click();
   }
 
-  private void sendContactForm() {
-    wD.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]")).click();
+  private void submitContactForm() {
+    wD.findElement(By.xpath("xpath=(//input[@name='submit'])[2]")).click();
   }
 
   private void fillContactForm(ContactData contactData) {
