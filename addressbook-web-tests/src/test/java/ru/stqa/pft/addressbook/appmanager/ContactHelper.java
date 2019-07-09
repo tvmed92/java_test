@@ -5,7 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-public class ContactHelper extends HelperBase{
+public class ContactHelper extends HelperBase {
 
     public ContactHelper(ChromeDriver wD) {
         super(wD);
@@ -35,10 +35,23 @@ public class ContactHelper extends HelperBase{
         new Select(wD.findElement(By.name("bmonth"))).selectByVisibleText("January");
         click(By.name("bmonth"));
         type(By.name("byear"), contactData.getYearOfBirth());
-        click(By.name("new_group"));
-        new Select(wD.findElement(By.name("new_group"))).selectByVisibleText("test_group");
-        click(By.name("new_group"));
         type(By.name("address2"), contactData.getExtraAddress());
         type(By.name("phone2"), contactData.getExtraPhone());
+    }
+
+    public void selectContact() {
+        click(By.xpath("//input[@id='4']"));
+    }
+
+    public void deleteSelectedContact() {
+        click(By.xpath("//input[@value='Delete']"));
+    }
+
+    public void initContactModification() {
+        click(By.xpath("//img[@alt='Edit']"));
+    }
+
+    public void updateContact() {
+        click(By.xpath("(//input[@name='update'])[2]"));
     }
 }

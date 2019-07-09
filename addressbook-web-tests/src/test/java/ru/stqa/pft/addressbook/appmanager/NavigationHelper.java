@@ -3,7 +3,7 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class NavigationHelper extends HelperBase{
+public class NavigationHelper extends HelperBase {
 
     public NavigationHelper(ChromeDriver wD) {
         super(wD);
@@ -18,10 +18,14 @@ public class NavigationHelper extends HelperBase{
     }
 
     public void goToHomePage() {
-        click(By.linkText("home page"));
+        click(By.linkText("home"));
     }
 
     public void goToAddNewPage() {
         click(By.linkText("add new"));
+    }
+
+    public void acceptAlert() {
+        wD.switchTo().alert().accept();
     }
 }
