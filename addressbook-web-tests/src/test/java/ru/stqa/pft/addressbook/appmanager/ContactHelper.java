@@ -40,7 +40,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void selectContact() {
-        click(By.xpath("//input[@id='4']"));
+        click(By.name("selected[]"));
     }
 
     public void deleteSelectedContact() {
