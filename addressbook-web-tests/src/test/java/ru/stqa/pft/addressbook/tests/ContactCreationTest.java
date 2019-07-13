@@ -23,7 +23,9 @@ public class ContactCreationTest extends TestBase {
                 "tat@rrr.ru",
                 "1992",
                 "eeee",
-                "www"));
+                "www",
+                "test1"),
+                true);
         app.getContactHelper().submitContactForm();
         app.getNavigationHelper().goToHomePage();
     }

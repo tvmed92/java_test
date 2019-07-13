@@ -24,7 +24,9 @@ public class ContactModificationTests extends TestBase {
                 "ta1t@rrr.ru",
                 "112",
                 "e1eee",
-                "www1"));
+                "www1",
+                null),
+                false);
         app.getContactHelper().updateContact();
         app.getNavigationHelper().goToHomePage();
     }
