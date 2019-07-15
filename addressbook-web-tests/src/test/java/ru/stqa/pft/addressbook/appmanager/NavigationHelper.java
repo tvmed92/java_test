@@ -9,10 +9,6 @@ public class NavigationHelper extends HelperBase {
         super(wD);
     }
 
-    public void returnToGroupPage() {
-        click(By.linkText("group page"));
-    }
-
     public void goToGroupPage() {
         if (isElementPresent(By.tagName("h1"))
                 && wD.findElement(By.tagName("h1")).getText().equals("Groups")
@@ -30,6 +26,10 @@ public class NavigationHelper extends HelperBase {
     }
 
     public void goToAddNewPage() {
+        if (isElementPresent(By.tagName("h1"))
+                && wD.findElement(By.tagName("h1")).getText().equals("Edit / add address book entry")) {
+            return;
+        }
         click(By.linkText("add new"));
     }
 
