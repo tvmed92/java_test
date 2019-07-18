@@ -41,39 +41,8 @@ public class ContactHelper extends HelperBase {
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
-
-//        if (contactData.getGroup() != null) {
-//            String existingText = wD.findElement(By.name("new_group")).getAttribute("value");
-//            if (! contactData.getGroup().equals(existingText)) {
-//                new Select(wD.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-//            }
-//
-//        }
     }
 
-    private boolean isGroupPresent(By locator) {
-        click(locator);
-        try {
-            new Select(wD.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-            return true;
-        } catch (NoSuchElementException ex) {
-            return false;
-        }
-    }
-
-//    public List<WebElement> getListItems() {
-//        return (List<WebElement>) new Select(wD.findElement(By.name("new_group")));
-//    }
-//
-//    public void selectItemFromDropdown (String text) {
-//        wD.findElement(By.name("new_group"));
-//        List<WebElement> items = getListItems();
-//        for (WebElement element : items) {
-//            if (element.getText().contains(text)){
-//                element.click();
-//            }
-//        }
-//    }
 
     private void selectFromList(String locator, String text) {
         new Select(wD.findElement(By.name(locator))).selectByVisibleText(text);
