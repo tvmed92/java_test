@@ -47,7 +47,6 @@ public class ContactHelper extends HelperBase {
         }
     }
 
-
     private void selectFromList(String locator, String text) {
         new Select(wD.findElement(By.name(locator))).selectByVisibleText(text);
     }
@@ -87,8 +86,8 @@ public class ContactHelper extends HelperBase {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wD.findElements(By.xpath("//td[input]"));
         for (WebElement element : elements) {
-            String firstname = element.getText();
-            String lastname = element.getText();
+            String firstname = element.findElement(By.xpath("//tr/td[3]")).getText();
+            String lastname = element.findElement(By.xpath("//tr/td[2]")).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             ContactData contact = new ContactData(id, firstname, null, lastname, null,
                     null, null, null, null, null, null,
