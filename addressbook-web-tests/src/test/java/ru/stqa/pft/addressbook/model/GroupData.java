@@ -3,14 +3,31 @@ package ru.stqa.pft.addressbook.model;
 import java.util.Objects;
 
 public class GroupData {
+    private int id;
     private final String groupName;
     private final String groupHeader;
     private final String groupFooter;
 
     public GroupData(String groupName, String groupHeader, String groupFooter) {
+        this.id = Integer.MAX_VALUE;
         this.groupName = groupName;
         this.groupHeader = groupHeader;
         this.groupFooter = groupFooter;
+    }
+
+    public GroupData(int id, String groupName, String groupHeader, String groupFooter) {
+        this.id = id;
+        this.groupName = groupName;
+        this.groupHeader = groupHeader;
+        this.groupFooter = groupFooter;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getGroupName() {
@@ -41,7 +58,8 @@ public class GroupData {
     @Override
     public String toString() {
         return "GroupData{" +
-                "groupName='" + groupName + '\'' +
+                "id='" + id + '\'' +
+                ", groupName='" + groupName + '\'' +
                 '}';
     }
 }

@@ -59,9 +59,6 @@ public class GroupHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
 
-
-    //далее часть дз № 9
-
     public int getGroupCount() {
         return wD.findElements(By.name("selected[]")).size();
     }
@@ -71,7 +68,8 @@ public class GroupHelper extends HelperBase {
         List<WebElement> elements = wD.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
             String name = element.getText();
-            GroupData group = new GroupData(name, null, null);
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            GroupData group = new GroupData(id, name, null, null);
             groups.add(group);
         }
         return groups;
