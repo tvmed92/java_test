@@ -3,43 +3,45 @@ package ru.stqa.pft.addressbook.model;
 import java.util.Objects;
 
 public class GroupData {
-    private int id;
-    private final String groupName;
-    private final String groupHeader;
-    private final String groupFooter;
+    private int id = Integer.MAX_VALUE;
+    private String name;
+    private String header;
+    private String footer;
 
-    public GroupData(String groupName, String groupHeader, String groupFooter) {
-        this.id = Integer.MAX_VALUE;
-        this.groupName = groupName;
-        this.groupHeader = groupHeader;
-        this.groupFooter = groupFooter;
+    public GroupData withId(int id) {
+        this.id = id;
+        return this;
     }
 
-    public GroupData(int id, String groupName, String groupHeader, String groupFooter) {
-        this.id = id;
-        this.groupName = groupName;
-        this.groupHeader = groupHeader;
-        this.groupFooter = groupFooter;
+    public GroupData withName(String groupName) {
+        this.name = groupName;
+        return this;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public GroupData withHeader(String groupHeader) {
+        this.header = groupHeader;
+        return this;
+    }
+
+    public GroupData withFooter(String groupFooter) {
+        this.footer = groupFooter;
+        return this;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getGroupName() {
-        return groupName;
+    public String getName() {
+        return name;
     }
 
-    public String getGroupHeader() {
-        return groupHeader;
+    public String getHeader() {
+        return header;
     }
 
-    public String getGroupFooter() {
-        return groupFooter;
+    public String getFooter() {
+        return footer;
     }
 
     @Override
@@ -47,19 +49,19 @@ public class GroupData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GroupData groupData = (GroupData) o;
-        return Objects.equals(groupName, groupData.groupName);
+        return Objects.equals(name, groupData.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(groupName);
+        return Objects.hash(name);
     }
 
     @Override
     public String toString() {
         return "GroupData{" +
                 "id='" + id + '\'' +
-                ", groupName='" + groupName + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

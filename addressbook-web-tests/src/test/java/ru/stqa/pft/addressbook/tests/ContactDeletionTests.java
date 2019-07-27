@@ -9,9 +9,9 @@ import java.util.List;
 
 public class ContactDeletionTests extends TestBase {
 
-    @Test
+    @Test(enabled = false)
     public void testContactDeletion() {
-        app.getNavigationHelper().goToHomePage();
+        app.goTo().goToHomePage();
         if (! app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(new ContactData("sany","don","smith",
                     null,null,null,null,null,null,null,
@@ -20,8 +20,8 @@ public class ContactDeletionTests extends TestBase {
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getContactHelper().selectContact(before.size() - 1);
         app.getContactHelper().deleteSelectedContact();
-        app.getNavigationHelper().acceptAlert();
-        app.getNavigationHelper().goToHomePage();
+        app.goTo().acceptAlert();
+        app.goTo().goToHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(before.size() - 1, after.size());
 
