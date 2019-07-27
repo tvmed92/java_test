@@ -18,12 +18,12 @@ public class ContactModificationTests extends TestBase {
                     null,null,null,null,null,"test1"), true);
         }
         List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().selectContact(before.size() - 1);
-        app.getContactHelper().initContactModification();
-        ContactData contact = new ContactData((before.get(before.size() - 1).getId()),
-                "assol",
-                "vik1t",
-                "belova",
+//        app.getContactHelper().selectContact();
+        app.getContactHelper().initContactModification(before.size() - 1);
+        ContactData contact = new ContactData(before.get(before.size() - 1).getId(),
+                "grant",
+                "little",
+                "simpson",
                 "molx21",
                 "qwty1",
                 "gaz1q",
