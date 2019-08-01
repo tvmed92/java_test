@@ -16,10 +16,50 @@ public class ContactData {
     private String workPh;
     private String fax;
     private String email;
+    private String email2;
+    private String email3;
     private String yearOfBirth;
     private String extraAddress;
     private String extraPhone;
     private String group;
+    private String allPhones;
+    private String allEmails;
+
+    public String getAllEmails() {
+        return allEmails;
+    }
+
+    public ContactData withAllEmails(String allEmails) {
+        this.allEmails = allEmails;
+        return this;
+    }
+
+    public String getEmail2() {
+        return email2;
+    }
+
+    public ContactData withEmail2(String email2) {
+        this.email2 = email2;
+        return this;
+    }
+
+    public String getEmail3() {
+        return email3;
+    }
+
+    public ContactData withEmail3(String email3) {
+        this.email3 = email3;
+        return this;
+    }
+
+    public String getAllPhones() {
+        return allPhones;
+    }
+
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
 
     public ContactData withId(int id) {
         this.id = id;
@@ -61,7 +101,7 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withHome(String home) {
+    public ContactData withHomePh(String home) {
         this.home = home;
         return this;
     }
@@ -130,13 +170,15 @@ public class ContactData {
         return title;
     }
 
-    public String getCompany() { return company; }
+    public String getCompany() {
+        return company;
+    }
 
     public String getAddress() {
         return address;
     }
 
-    public String getHome() {
+    public String getHomePh() {
         return home;
     }
 
