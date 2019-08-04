@@ -38,11 +38,12 @@ public class ContactHelper extends HelperBase {
         type(By.name("byear"), contactData.getYearOfBirth());
         type(By.name("address2"), contactData.getExtraAddress());
         type(By.name("phone2"), contactData.getExtraPhone());
+        attach(By.name("photo"), contactData.getPhoto());
 
         if (isCreation) {
-            new Select(wD.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-        } else {
-            Assert.assertFalse(isElementPresent(By.name("new_group")));
+            if (contactData.getGroup() != null) {
+                new Select(wD.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            }
         }
     }
 
