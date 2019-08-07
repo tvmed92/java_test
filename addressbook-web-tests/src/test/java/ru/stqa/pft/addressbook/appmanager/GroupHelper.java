@@ -27,7 +27,7 @@ public class GroupHelper extends HelperBase {
     }
 
     public void submitModification() {
-        click(By.name("submitModification"));
+        click(By.name("update"));
     }
 
     public void selectGroupById(int id) {
