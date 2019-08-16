@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("byear"), contactData.getYearOfBirth());
         type(By.name("address2"), contactData.getExtraAddress());
         type(By.name("phone2"), contactData.getExtraPhone());
-        attach(By.name("photo"), contactData.getPhoto());
+//        attach(By.name("photo"), contactData.getPhoto());
 
         if (isCreation) {
             if (contactData.getGroup() != null) {
@@ -74,6 +75,7 @@ public class ContactHelper extends HelperBase {
         new NavigationHelper(wD).newContactPage();
         fillForm(contact, isCreation);
         submitForm();
+        contactCache = null;
         returnToHomePage();
     }
 
@@ -81,18 +83,25 @@ public class ContactHelper extends HelperBase {
         initModification(contact.getId());
         fillForm(contact, false);
         submitModification();
+        contactCache = null;
         returnToHomePage();
     }
 
     public void delete(ContactData contact) {
         selectContactById(contact.getId());
         deleteSelectedContact();
+        contactCache = null;
         new NavigationHelper(wD).acceptAlert();
         returnToHomePage();
     }
 
+    private Contacts contactCache = null;
+
     public Contacts all() {
-        Contacts contacts = new Contacts();
+        if (contactCache != null) {
+            return new Contacts(contactCache);
+        }
+        contactCache = new Contacts();
         List<WebElement> rows = wD.findElements(By.name("entry"));
         for (WebElement row : rows) {
             List<WebElement> cells = row.findElements(By.tagName("td"));
@@ -102,10 +111,10 @@ public class ContactHelper extends HelperBase {
             String address = cells.get(3).getText();
             String allEmails = cells.get(4).getText();
             String allPhones = cells.get(5).getText();
-            contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
+            contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
                     .withAllPhones(allPhones).withAllEmails(allEmails).withAddress(address));
         }
-        return contacts;
+        return contactCache;
     }
 
     public ContactData infoFromEditForm(ContactData contact) {

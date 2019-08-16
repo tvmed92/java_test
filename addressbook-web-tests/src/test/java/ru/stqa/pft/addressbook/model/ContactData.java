@@ -3,46 +3,92 @@ package ru.stqa.pft.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 import java.util.Objects;
 
 @XStreamAlias("contacts")
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
     @XStreamOmitField
+    @Id
+    @Column(name = "id")
     private int id = Integer.MAX_VALUE;
     @Expose
     private String firstname;
+
     @Expose
     private String middlename;
+
     @Expose
     private String lastname;
+
     private String nickname;
+
     private String title;
+
     private String company;
+
+    @Type(type = "text")
     private String address;
-    private String home;
+
+    @Column(name = "home")
+    @Type(type = "text")
+    private String homePh;
+
+    @Column(name = "mobile")
+    @Type(type = "text")
     private String mobilePh;
+
+    @Column(name = "work")
+    @Type(type = "text")
     private String workPh;
+
+    @Type(type = "text")
     private String fax;
+
     @Expose
+    @Type(type = "text")
     private String email;
+
+    @Type(type = "text")
     private String email2;
+
+    @Type(type = "text")
     private String email3;
+
+    @Transient
     private String yearOfBirth;
+
+    @Column(name = "address2")
+    @Type(type = "text")
     private String extraAddress;
+
+    @Column(name = "phone2")
+    @Type(type = "text")
     private String extraPhone;
+
+    @Transient
     private String group;
+
+    @Transient
     private String allPhones;
+
+    @Transient
     private String allEmails;
-    private File photo;
+
+    @Type(type = "text")
+    private String photo;
 
     public File getPhoto() {
-        return photo;
+        return new File(photo);
     }
 
     public ContactData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 
@@ -123,7 +169,7 @@ public class ContactData {
     }
 
     public ContactData withHomePh(String home) {
-        this.home = home;
+        this.homePh = home;
         return this;
     }
 
@@ -200,7 +246,7 @@ public class ContactData {
     }
 
     public String getHomePh() {
-        return home;
+        return homePh;
     }
 
     public String getMobilePh() {
@@ -242,12 +288,28 @@ public class ContactData {
         ContactData that = (ContactData) o;
         return id == that.id &&
                 Objects.equals(firstname, that.firstname) &&
-                Objects.equals(lastname, that.lastname);
+                Objects.equals(middlename, that.middlename) &&
+                Objects.equals(lastname, that.lastname) &&
+                Objects.equals(nickname, that.nickname) &&
+                Objects.equals(title, that.title) &&
+                Objects.equals(company, that.company) &&
+                Objects.equals(address, that.address) &&
+                Objects.equals(homePh, that.homePh) &&
+                Objects.equals(mobilePh, that.mobilePh) &&
+                Objects.equals(workPh, that.workPh) &&
+                Objects.equals(fax, that.fax) &&
+                Objects.equals(email, that.email) &&
+                Objects.equals(email2, that.email2) &&
+                Objects.equals(email3, that.email3) &&
+                Objects.equals(extraAddress, that.extraAddress) &&
+                Objects.equals(extraPhone, that.extraPhone);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstname, lastname);
+        return Objects.hash(id, firstname, middlename, lastname, nickname,
+                title, company, address, homePh, mobilePh, workPh, fax,
+                email, email2, email3, extraAddress, extraPhone);
     }
 
     @Override
