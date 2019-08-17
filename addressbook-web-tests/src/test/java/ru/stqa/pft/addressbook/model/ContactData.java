@@ -26,27 +26,35 @@ public class ContactData {
     @Expose
     private String lastname;
 
+    @Expose
     private String nickname;
 
+    @Expose
     private String title;
 
+    @Expose
     private String company;
 
+    @Expose
     @Type(type = "text")
     private String address;
 
+    @Expose
     @Column(name = "home")
     @Type(type = "text")
     private String homePh;
 
+    @Expose
     @Column(name = "mobile")
     @Type(type = "text")
     private String mobilePh;
 
+    @Expose
     @Column(name = "work")
     @Type(type = "text")
     private String workPh;
 
+    @Expose
     @Type(type = "text")
     private String fax;
 
@@ -54,19 +62,23 @@ public class ContactData {
     @Type(type = "text")
     private String email;
 
+    @Expose
     @Type(type = "text")
     private String email2;
 
+    @Expose
     @Type(type = "text")
     private String email3;
 
     @Transient
     private String yearOfBirth;
 
+    @Expose
     @Column(name = "address2")
     @Type(type = "text")
     private String extraAddress;
 
+    @Expose
     @Column(name = "phone2")
     @Type(type = "text")
     private String extraPhone;
@@ -84,7 +96,11 @@ public class ContactData {
     private String photo;
 
     public File getPhoto() {
-        return new File(photo);
+        if (photo == null) {
+            return null;
+        } else {
+            return new File(photo);
+        }
     }
 
     public ContactData withPhoto(File photo) {

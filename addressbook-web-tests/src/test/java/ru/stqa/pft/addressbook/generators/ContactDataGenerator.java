@@ -82,7 +82,19 @@ public class ContactDataGenerator {
             contacts.add(new ContactData().withFirstname(String.format("firstname %s", i))
                     .withLastname(String.format("lastname %s", i))
                     .withMiddlename(String.format("middlename %s", i))
-                    .withEmail(String.format("email %s", i)));
+                    .withNickname(String.format("nickname %s", i))
+                    .withEmail(String.format("email %s", i))
+                    .withEmail2(String.format("email2 %s", i))
+                    .withEmail3(String.format("email3 %s", i))
+                    .withTitle(String.format("title %s", i))
+                    .withAddress(String.format("address %s", i))
+                    .withHomePh(String.format("homePhone %s", i))
+                    .withMobilePh(String.format("mobilePhone %s", i))
+                    .withWorkPh(String.format("workPhone %s", i))
+                    .withExtraPhone(String.format("extraPhone %s", i))
+                    .withCompany(String.format("company %s", i))
+                    .withExtraAddress(String.format("extraAddress %s", i))
+                    .withFax(String.format("fax %s", i)));
         }
         return contacts;
     }

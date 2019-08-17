@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
-import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.List;
 
@@ -33,12 +32,14 @@ public class ContactHelper extends HelperBase {
         type(By.name("work"), contactData.getWorkPh());
         type(By.name("fax"), contactData.getFax());
         type(By.name("email"), contactData.getEmail());
+        type(By.name("email2"), contactData.getEmail2());
+        type(By.name("email3"), contactData.getEmail3());
         selectFromList("bday", "1");
         selectFromList("bmonth", "January");
         type(By.name("byear"), contactData.getYearOfBirth());
         type(By.name("address2"), contactData.getExtraAddress());
         type(By.name("phone2"), contactData.getExtraPhone());
-//        attach(By.name("photo"), contactData.getPhoto());
+        attach(By.name("photo"), contactData.getPhoto());
 
         if (isCreation) {
             if (contactData.getGroup() != null) {
