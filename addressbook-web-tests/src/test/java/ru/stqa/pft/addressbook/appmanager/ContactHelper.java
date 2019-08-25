@@ -4,8 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -42,11 +44,15 @@ public class ContactHelper extends HelperBase {
         attach(By.name("photo"), contactData.getPhoto());
 
         if (isCreation) {
-            if (contactData.getGroup() != null) {
-                new Select(wD.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            if (contactData.getGroups().size() > 0) {
+                Assert.assertTrue(contactData.getGroups().size() == 1);
+                selectGroup("new_group", contactData.getGroups().iterator().next().getName());
             }
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
     }
+
 
     private void selectFromList(String locator, String text) {
         new Select(wD.findElement(By.name(locator))).selectByVisibleText(text);
@@ -141,5 +147,20 @@ public class ContactHelper extends HelperBase {
 
     public int count() {
         return wD.findElements(By.name("selected[]")).size();
+    }
+
+    public void addToGroup(ContactData contact, GroupData group) {
+        selectContactById(contact.getId());
+        selectGroup("to_group", group.getName());
+        click(By.name("add"));
+        getGroupID(group.getId());
+    }
+
+    private void selectGroup(String listName, String groupName) {
+        new Select(wD.findElement(By.name(listName))).selectByVisibleText(groupName);
+    }
+
+    private void getGroupID(int id) {
+        wD.findElement(By.cssSelector("a[href='./?group=" + id + "']")).click();
     }
 }
