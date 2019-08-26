@@ -163,4 +163,21 @@ public class ContactHelper extends HelperBase {
     private void getGroupID(int id) {
         wD.findElement(By.cssSelector("a[href='./?group=" + id + "']")).click();
     }
+
+    public void removeFromGroup(ContactData contact) {
+        filterContactsByGroup(contact);
+        selectContactById(contact.getId());
+        click(By.name("remove"));
+        returnToHomePage();
+        selectAllGroupsContacts();
+    }
+
+    private void filterContactsByGroup(ContactData contact) {
+        new Select(wD.findElement(By.name("group")))
+                .selectByVisibleText(contact.getGroups().iterator().next().getName());
+    }
+
+    private void selectAllGroupsContacts() {
+        new Select(wD.findElement(By.name("group"))).selectByVisibleText("[all]");
+    }
 }

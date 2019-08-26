@@ -69,8 +69,3 @@ public class ContactCreationTests extends TestBase {
                 .withId(after.stream().mapToInt(c -> c.getId()).max().getAsInt()))));
     }
 }
-
-// добавление файла хорошо бы вынести в отдельный метод, пока тут
-//        File photo = new File("src/test/resources/img.jpg");
-//        ContactData contact = new ContactData()
-//                .withFirstname("jolly").withLastname("woo").withMiddlename("ho").withPhoto(photo);

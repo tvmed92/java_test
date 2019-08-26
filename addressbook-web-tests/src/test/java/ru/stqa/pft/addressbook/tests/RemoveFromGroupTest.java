@@ -10,7 +10,7 @@ import ru.stqa.pft.addressbook.model.Groups;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class AddToGroupTest extends TestBase {
+public class RemoveFromGroupTest extends TestBase{
 
     @BeforeMethod
     public void ensurePreconditions() {
@@ -29,36 +29,33 @@ public class AddToGroupTest extends TestBase {
                     .withName("test1").withHeader("header1").withFooter("footer1"));
         }
         Contacts contacts = app.db().contacts();
-        Groups groups = app.db().groups();
         for (ContactData contact : contacts) {
-            if (contact.getGroups().size() == groups.size()) {
-                app.goTo().groupPage();
-                app.group().create(new GroupData()
-                        .withName("test2").withHeader("header2").withFooter("footer2"));
+            if (contact.getGroups().size() < 1) {
+                GroupData chosenGroup = app.db().groups().iterator().next();
+                app.contact().addToGroup(contact, chosenGroup);
             }
         }
         app.goTo().homePage();
     }
 
     @Test
-    public void testAddToGroup() {
+    public void testRemoveFromGroup() {
         Contacts contactsBefore = app.db().contacts();
-        GroupData chosenGroup = app.db().groups().iterator().next();
         for (ContactData contactBefore : contactsBefore) {
-            if (!contactBefore.getGroups().contains(chosenGroup)) {
+            if (contactBefore.getGroups() != null) {
                 Groups groupsBefore = contactBefore.getGroups();
-                app.contact().addToGroup(contactBefore, chosenGroup);
+                app.contact().removeFromGroup(contactBefore);
                 Contacts contactsAfter = app.db().contacts();
                 for (ContactData contactAfter : contactsAfter) {
                     if (contactAfter.getId() == contactBefore.getId()) {
                         Groups groupsAfter = contactAfter.getGroups();
-                        assertThat(groupsAfter.size(), equalTo(groupsBefore.size() + 1));
-                        assertThat(groupsAfter, equalTo(groupsBefore.withAdded(chosenGroup)));
+                        assertThat(groupsAfter.size(), equalTo(groupsBefore.size() - 1));
+                        groupsBefore.removeAll(groupsAfter);
+                        assertThat(groupsAfter, equalTo(
+                                contactBefore.getGroups().without(groupsBefore.iterator().next())));
                     }
                 }
             }
         }
     }
 }
-
-
