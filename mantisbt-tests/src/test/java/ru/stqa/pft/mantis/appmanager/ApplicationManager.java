@@ -23,7 +23,6 @@ public class ApplicationManager {
     private JamesHelper jamesHelper;
     private AdminHelper adminHelper;
     private DbHelper dbHelper;
-    private SessionHelper sessionHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -35,8 +34,6 @@ public class ApplicationManager {
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
 
         dbHelper = new DbHelper();
-//        sessionHelper = new SessionHelper(this);
-//        sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
     }
 
     public void stop() {
@@ -82,24 +79,26 @@ public class ApplicationManager {
         return wD;
     }
 
-    public DbHelper db() { return dbHelper; }
+    public DbHelper db() {
+        return dbHelper;
+    }
 
     public MailHelper mail() {
-        if(mailHelper == null) {
+        if (mailHelper == null) {
             mailHelper = new MailHelper(this);
         }
         return mailHelper;
     }
 
     public JamesHelper james() {
-        if(jamesHelper == null) {
+        if (jamesHelper == null) {
             jamesHelper = new JamesHelper(this);
         }
         return jamesHelper;
     }
 
     public AdminHelper admin() {
-        if(adminHelper == null) {
+        if (adminHelper == null) {
             adminHelper = new AdminHelper(this);
         }
         return adminHelper;
