@@ -4,6 +4,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.lanwen.verbalregex.VerbalExpression;
+import ru.stqa.pft.mantis.appmanager.HttpSession;
 import ru.stqa.pft.mantis.model.MailMessage;
 import ru.stqa.pft.mantis.model.UserData;
 import ru.stqa.pft.mantis.model.Users;
@@ -22,12 +23,13 @@ public class ChangePassByAdminTest extends TestBase {
 
     @Test
     public void testChangePassByAdmin() throws IOException {
-//        final String adminLogin = app.getProperty("web.adminLogin");
-//        final String adminPassword = app.getProperty("web.adminPassword");
+        final String adminLogin = app.getProperty("web.adminLogin");
+        final String adminPassword = app.getProperty("web.adminPassword");
         String userPassword = app.getProperty("web.userPassword");
         Users users = app.db().users();
         UserData user = new UserData().setId(users.iterator().next().getId());
-//        app.admin().start(adminLogin, adminPassword);
+        HttpSession session = app.newSession();
+        assertTrue(session.login(adminLogin, adminPassword));
         app.admin().initPasswordChange(user);
         final List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
         final String changePasswordLink = findConfirmationLink(mailMessages, user.getMail());
