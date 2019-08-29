@@ -26,14 +26,18 @@ public class ChangePassByAdminTest extends TestBase {
         final String adminPassword = app.getProperty("web.adminPassword");
         String userPassword = app.getProperty("web.userPassword");
         Users users = app.db().users();
-        UserData user = new UserData().setId(users.iterator().next().getId());
-        app.admin().start(adminLogin, adminPassword);
-        app.admin().initPasswordChange(user);
-        final List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
-        final String changePasswordLink = findConfirmationLink(mailMessages, user.getMail());
-        app.registration().finish(changePasswordLink, userPassword);
-        app.newSession().login(user.getUsername(), userPassword);
-        assertTrue(app.newSession().login(user.getUsername(), userPassword));
+        for (UserData user : users) {
+            if (!user.getUsername().equals("administrator")) {
+                user = new UserData().setId(users.iterator().next().getId());
+                app.admin().start(adminLogin, adminPassword);
+                app.admin().initPasswordChange(user);
+                final List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
+                final String changePasswordLink = findConfirmationLink(mailMessages, user.getMail());
+                app.registration().finish(changePasswordLink, userPassword);
+                app.newSession().login(user.getUsername(), userPassword);
+                assertTrue(app.newSession().login(user.getUsername(), userPassword));
+            }
+        }
     }
 
 
