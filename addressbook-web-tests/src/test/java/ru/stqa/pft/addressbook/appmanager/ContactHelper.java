@@ -151,17 +151,17 @@ public class ContactHelper extends HelperBase {
 
     public void addToGroup(ContactData contact, GroupData group) {
         selectContactById(contact.getId());
-        selectGroup("to_group", group.getName());
+        selectGroupToAdd(group.getId());
         click(By.name("add"));
-        getGroupID(group.getId());
+        returnToHomePage();
+    }
+
+    private void selectGroupToAdd(int id) {
+        new Select(wD.findElement(By.name("to_group"))).selectByValue(String.valueOf(id));
     }
 
     private void selectGroup(String listName, String groupName) {
         new Select(wD.findElement(By.name(listName))).selectByVisibleText(groupName);
-    }
-
-    private void getGroupID(int id) {
-        wD.findElement(By.cssSelector("a[href='./?group=" + id + "']")).click();
     }
 
     public void removeFromGroup(ContactData contact) {
